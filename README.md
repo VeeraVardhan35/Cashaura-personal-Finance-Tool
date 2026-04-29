@@ -1,6 +1,6 @@
-# Expense Tracker
+# Cashaura
 
-Production-style full-stack expense tracker built as a monorepo with:
+Production-style full-stack personal finance tracker built as a monorepo with:
 
 - `backend`: FastAPI + SQLAlchemy async + SQLite
 - `frontend`: React 18 + TypeScript + Vite + TailwindCSS

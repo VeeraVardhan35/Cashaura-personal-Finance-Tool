@@ -21,14 +21,14 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#f2efe7] text-ink">
       <nav className="sticky top-0 z-50 flex h-[52px] items-center justify-between border-b-[1.5px] border-ink bg-[#f2efe7] px-4 sm:px-8">
-        <div className="font-display text-[22px] tracking-[0.18em]">LEDGER</div>
+        <div className="font-display text-[22px] tracking-[0.18em]">CASHAURA</div>
         <div className="border-[1.5px] border-ink px-3 py-1 text-[11px] font-bold tracking-[0.2em] text-[#d94f3a]">
           PERSONAL FINANCE
         </div>
       </nav>
 
       <header className="border-b-[1.5px] border-ink px-4 py-16 text-center sm:px-8 sm:py-20">
-        <div className="text-[11px] uppercase tracking-[0.4em] text-[#d94f3a]">Track every rupee</div>
+        <div className="text-[11px] uppercase tracking-[0.4em] text-[#d94f3a]">Cashaura Money Log</div>
         <h1 className="mt-4 font-display text-[56px] leading-[0.9] tracking-[0.08em] sm:text-[84px] lg:text-[100px]">
           WHERE DOES
           <br />
@@ -81,8 +81,8 @@ export default function App() {
       </main>
 
       <footer className="flex flex-col gap-2 border-t-[1.5px] border-ink px-4 py-6 text-[10px] uppercase tracking-[0.3em] text-[#7a7870] sm:flex-row sm:items-center sm:justify-between sm:px-8">
-        <span>Ledger v1.0</span>
-        <span>Built for Fenmo SDE Assignment</span>
+        <span>Cashaura v1.0</span>
+        <span>Built for personal finance tracking</span>
       </footer>
     </div>
   );

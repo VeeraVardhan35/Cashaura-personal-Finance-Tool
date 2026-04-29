@@ -37,7 +37,7 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
     await db.dispose()
 
 
-app = FastAPI(title="Expense Tracker API", lifespan=lifespan)
+app = FastAPI(title="Cashaura API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,

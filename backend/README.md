@@ -1,6 +1,6 @@
-# Backend
+# Cashaura Backend
 
-FastAPI backend for the Expense Tracker application.
+FastAPI backend for the Cashaura application.
 
 ## Run
 
