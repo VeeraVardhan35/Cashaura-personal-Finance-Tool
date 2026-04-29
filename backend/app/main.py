@@ -1,3 +1,4 @@
+import os
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 
@@ -9,6 +10,13 @@ from fastapi.responses import JSONResponse
 from app.database import db
 from app.routes.expenses import router as expenses_router
 from app.services.expense_service import AppError
+
+
+def get_cors_origins() -> list[str]:
+    raw_origins = os.getenv("CORS_ORIGINS")
+    if raw_origins:
+        return [origin.strip() for origin in raw_origins.split(",") if origin.strip()]
+    return ["http://localhost:5173"]
 
 
 def error_response(
@@ -41,7 +49,7 @@ app = FastAPI(title="Cashaura API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=get_cors_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
