@@ -5,6 +5,7 @@ import type { ApiError, Expense, ExpenseSort } from "../types";
 
 type UseExpensesResult = {
   expenses: Expense[];
+  allExpenses: Expense[];
   total: string;
   loading: boolean;
   error: string | null;
@@ -23,6 +24,8 @@ function formatApiError(error: unknown): string {
 
 export function useExpenses(): UseExpensesResult {
   const [expenses, setExpenses] = useState<Expense[]>([]);
+  const [allExpenses, setAllExpenses] = useState<Expense[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
   const [total, setTotal] = useState("0.00");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -34,9 +37,19 @@ export function useExpenses(): UseExpensesResult {
     setError(null);
 
     try {
-      const response = await fetchExpenses(category || undefined, sort);
-      setExpenses(response.expenses);
-      setTotal(response.total);
+      const [filteredResponse, allExpensesResponse] = await Promise.all([
+        fetchExpenses(category || undefined, sort),
+        category ? fetchExpenses(undefined, "date_desc") : Promise.resolve(null),
+      ]);
+
+      setExpenses(filteredResponse.expenses);
+      setTotal(filteredResponse.total);
+
+      const categorySource = allExpensesResponse?.expenses ?? filteredResponse.expenses;
+      setAllExpenses(categorySource);
+      setCategories(
+        [...new Set(categorySource.map((expense) => expense.category))].sort(),
+      );
     } catch (loadError) {
       setError(formatApiError(loadError));
     } finally {
@@ -48,10 +61,9 @@ export function useExpenses(): UseExpensesResult {
     void loadExpenses();
   }, [category, sort]);
 
-  const categories = [...new Set(expenses.map((expense) => expense.category))].sort();
-
   return {
     expenses,
+    allExpenses,
     total,
     loading,
     error,

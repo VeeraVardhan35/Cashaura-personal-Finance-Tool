@@ -1,3 +1,4 @@
+import { CategorySummary } from "./components/CategorySummary";
 import { ExpenseFilter } from "./components/ExpenseFilter";
 import { ExpenseForm } from "./components/ExpenseForm";
 import { ExpenseList } from "./components/ExpenseList";
@@ -7,6 +8,7 @@ import { useExpenses } from "./hooks/useExpenses";
 export default function App() {
   const {
     expenses,
+    allExpenses,
     total,
     loading,
     error,
@@ -68,6 +70,7 @@ export default function App() {
           ) : null}
 
           <TotalBar total={total} count={expenses.length} />
+          <CategorySummary expenses={allExpenses} />
           <ExpenseList
             expenses={expenses}
             loading={loading}
