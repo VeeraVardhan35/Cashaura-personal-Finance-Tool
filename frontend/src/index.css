@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #111110;
+  background: #f2efe7;
+  font-family: "Space Mono", monospace;
+}
+
+html {
+  background: #f2efe7;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #f2efe7;
+  color: #111110;
+  font-family: "Space Mono", monospace;
+  font-size: 13px;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  *::before,
+  *::after {
+    @apply box-border;
+  }
+}
+
+@layer components {
+  .ledger-border {
+    @apply border-[1.5px] border-ink;
+  }
+
+  .ledger-input {
+    @apply w-full bg-[#fafaf8] px-3 py-2.5 text-[13px] text-ink outline-none transition-shadow appearance-none;
+    border: 1.5px solid #111110;
+    border-radius: 0;
+    -webkit-appearance: none;
+  }
+
+  .ledger-input:focus {
+    box-shadow: 3px 3px 0 #111110;
+  }
+
+  .ledger-select {
+    @apply ledger-input cursor-pointer pr-9;
+  }
+
+  .ledger-label {
+    @apply mb-1.5 block text-[10px] uppercase tracking-[0.3em] text-[#7a7870];
+  }
+
+  .ledger-section-label {
+    @apply mb-6 border-b border-[#c5c2b8] pb-2 text-[10px] uppercase tracking-[0.4em] text-[#7a7870];
+  }
+}
