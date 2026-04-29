@@ -7,8 +7,7 @@ __pycache__/
 Thumbs.db
 backend/.venv/
 backend/.pytest_cache/
-backend/expenses.db
-backend/data/
+backend/.env
 frontend/node_modules/
 frontend/dist/
 npm-debug.log*
