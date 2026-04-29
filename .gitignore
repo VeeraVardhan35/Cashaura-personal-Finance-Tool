@@ -1,8 +1,17 @@
 .venv/
 __pycache__/
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.DS_Store
+Thumbs.db
 backend/.venv/
 backend/.pytest_cache/
 backend/expenses.db
+backend/data/
 frontend/node_modules/
 frontend/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
