@@ -58,6 +58,20 @@ app.add_middleware(
 app.include_router(expenses_router)
 
 
+@app.get("/")
+async def root() -> dict[str, object]:
+    return {
+        "message": "Welcome to Cashaura API.",
+        "description": "Expense tracking backend for the Cashaura personal finance tool.",
+        "routes": {
+            "health": "/health",
+            "docs": "/docs",
+            "list_expenses": "/expenses",
+            "create_expense": "/expenses",
+        },
+    }
+
+
 @app.get("/health")
 async def healthcheck() -> dict[str, str]:
     return {"status": "ok"}
