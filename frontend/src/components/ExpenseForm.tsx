@@ -44,7 +44,10 @@ function readErrorMessage(error: unknown): string {
   if (details.length) {
     return details.map((detail) => detail.message).join(" ");
   }
-  if (error instanceof TypeError) {
+  if (apiError?.error?.code === "request_timeout") {
+    return "The server took too long to respond. It may be waking up from an idle state. Your draft is saved and retry will reuse the same request key.";
+  }
+  if (apiError?.error?.code === "network_error" || error instanceof TypeError) {
     return "Network error. Your draft is still saved, and retry will reuse the same request key.";
   }
   return apiError?.error?.message ?? "Something went wrong.";

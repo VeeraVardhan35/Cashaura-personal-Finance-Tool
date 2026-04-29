@@ -11,6 +11,7 @@ export default function App() {
     allExpenses,
     total,
     loading,
+    loadingMessage,
     error,
     category,
     sort,
@@ -69,11 +70,18 @@ export default function App() {
             </div>
           ) : null}
 
+          {loading ? (
+            <div className="mb-6 border-[1.5px] border-ink bg-[#fafaf8] px-6 py-4 text-[11px] tracking-[0.08em] text-[#7a7870]">
+              Waiting for the server to respond. If the backend was idle, it may take a minute to wake up.
+            </div>
+          ) : null}
+
           <TotalBar total={total} count={expenses.length} />
           <CategorySummary expenses={allExpenses} />
           <ExpenseList
             expenses={expenses}
             loading={loading}
+            loadingMessage={loadingMessage}
             emptyMessage={
               category
                 ? "Nothing matches this filter. Try another category or add a new expense."

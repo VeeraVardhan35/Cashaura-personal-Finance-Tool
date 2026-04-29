@@ -1,13 +1,22 @@
 import type { ApiError, ExpenseFormInput, ExpenseListResponse, ExpenseSort } from "../types";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://127.0.0.1:8000";
-const REQUEST_TIMEOUT_MS = 15000;
+const REQUEST_TIMEOUT_MS = 60000;
 const GET_RETRY_DELAYS_MS = [400, 1200];
 
 function createTimeoutError(message: string): ApiError {
   return {
     error: {
       code: "request_timeout",
+      message,
+    },
+  };
+}
+
+function createNetworkError(message: string): ApiError {
+  return {
+    error: {
+      code: "network_error",
       message,
     },
   };
@@ -29,7 +38,12 @@ async function fetchWithTimeout(
   } catch (error) {
     if (error instanceof DOMException && error.name === "AbortError") {
       throw createTimeoutError(
-        "The request took too long. You can safely retry with the same form data.",
+        "The server took too long to respond. It may be waking up from an idle state. You can safely retry with the same form data.",
+      );
+    }
+    if (error instanceof TypeError) {
+      throw createNetworkError(
+        "Network error. The server may be unavailable or still waking up. Retry is safe.",
       );
     }
     throw error;

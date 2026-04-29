@@ -8,6 +8,7 @@ type UseExpensesResult = {
   allExpenses: Expense[];
   total: string;
   loading: boolean;
+  loadingMessage: string;
   error: string | null;
   category: string;
   sort: ExpenseSort;
@@ -28,6 +29,9 @@ export function useExpenses(): UseExpensesResult {
   const [categories, setCategories] = useState<string[]>([]);
   const [total, setTotal] = useState("0.00");
   const [loading, setLoading] = useState(true);
+  const [loadingMessage, setLoadingMessage] = useState(
+    "Waiting for the server to respond. Free-tier backends may take up to a minute to wake up.",
+  );
   const [error, setError] = useState<string | null>(null);
   const [category, setCategory] = useState("");
   const [sort, setSort] = useState<ExpenseSort>("date_desc");
@@ -35,6 +39,9 @@ export function useExpenses(): UseExpensesResult {
   const loadExpenses = async () => {
     setLoading(true);
     setError(null);
+    setLoadingMessage(
+      "Waiting for the server to respond. Free-tier backends may take up to a minute to wake up.",
+    );
 
     try {
       const [filteredResponse, allExpensesResponse] = await Promise.all([
@@ -66,6 +73,7 @@ export function useExpenses(): UseExpensesResult {
     allExpenses,
     total,
     loading,
+    loadingMessage,
     error,
     category,
     sort,

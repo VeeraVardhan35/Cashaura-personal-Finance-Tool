@@ -3,6 +3,7 @@ import type { Expense } from "../types";
 type ExpenseListProps = {
   expenses: Expense[];
   loading: boolean;
+  loadingMessage?: string;
   emptyMessage?: string;
 };
 
@@ -17,7 +18,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-IN", {
   year: "numeric",
 });
 
-function LoadingState() {
+function LoadingState({ message }: { message: string }) {
   return (
     <div className="border-[1.5px] border-ink px-6 py-16 text-center text-[#7a7870]">
       <div className="font-display text-[36px] tracking-[0.2em] text-ink">
@@ -26,6 +27,9 @@ function LoadingState() {
         <span className="animate-pulse [animation-delay:300ms]">.</span>
       </div>
       <div className="mt-2 text-[11px] tracking-[0.18em]">Loading your expenses</div>
+      <div className="mx-auto mt-3 max-w-[440px] text-[11px] leading-6 tracking-[0.08em]">
+        {message}
+      </div>
     </div>
   );
 }
@@ -33,10 +37,11 @@ function LoadingState() {
 export function ExpenseList({
   expenses,
   loading,
+  loadingMessage = "Waiting for the server to respond.",
   emptyMessage = "Nothing here yet. Add your first expense on the left.",
 }: ExpenseListProps) {
   if (loading) {
-    return <LoadingState />;
+    return <LoadingState message={loadingMessage} />;
   }
 
   if (!expenses.length) {
